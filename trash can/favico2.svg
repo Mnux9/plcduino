@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   sodipodi:docname="favico2.svg"
+   inkscape:export-filename="favico2.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4823794"
+     inkscape:cx="220.5913"
+     inkscape:cy="78.252572"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer2"
+     showguides="false" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient6"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#4da940;stop-opacity:1;"
+         offset="0"
+         id="stop6" />
+      <stop
+         style="stop-color:#4ba83b;stop-opacity:0.27272728;"
+         offset="1"
+         id="stop7" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#a0d0ef;stop-opacity:1;"
+         offset="0.35943061"
+         id="stop4" />
+      <stop
+         style="stop-color:#00c1ed;stop-opacity:1;"
+         offset="1"
+         id="stop5" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4"
+       id="linearGradient5"
+       x1="-99.170427"
+       y1="89.251712"
+       x2="-44.681376"
+       y2="89.251712"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6"
+       id="linearGradient7"
+       x1="-46.830872"
+       y1="87.595215"
+       x2="-103.01997"
+       y2="87.595215"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="screw"
+     transform="translate(-22.334967,-40.732135)">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:76.8963px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:start;letter-spacing:0.531866px;word-spacing:1.05092px;writing-mode:tb-rl;direction:ltr;text-anchor:start;fill:url(#linearGradient7);fill-opacity:1;stroke:url(#linearGradient5);stroke-width:2.9;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       x="-77.924927"
+       y="85.672745"
+       id="text2"
+       transform="matrix(0,-1.2109661,0.82578695,0,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-size:76.8963px;text-align:center;text-anchor:middle;fill:url(#linearGradient7);fill-opacity:1;stroke:url(#linearGradient5);stroke-width:2.9;stroke-dasharray:none;stroke-opacity:1"
+         x="-77.924927"
+         y="85.938675">MX</tspan></text>
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-22.334967,-40.732135)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="screw-labels"
+     transform="translate(-22.334967,-40.732135)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="screw-labels-perma" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="leds"
+     transform="translate(-22.334967,-40.732135)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="FP-LABELS" />
+</svg>

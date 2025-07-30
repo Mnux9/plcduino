@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="200">
+  <g id="screw-labels">
+    <text x="50" y="50" font-size="16" fill="black">Label 1</text>
+    <text x="50" y="100" font-size="16" fill="black">Label 2</text>
+  </g>
+  <g id="other-elements">
+    <text x="50" y="150" font-size="16" fill="gray">Non-editable</text>
+  </g>
+</svg>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="89.48259mm"
+   height="53.291645mm"
+   viewBox="0 0 89.48259 53.291645"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   sodipodi:docname="favicon.svg"
+   inkscape:export-filename="favicon.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0145798"
+     inkscape:cx="28.090447"
+     inkscape:cy="-26.119188"
+     inkscape:window-width="1680"
+     inkscape:window-height="940"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient4"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#c3c3c3;stop-opacity:0.75728203;"
+         offset="0"
+         id="stop4" />
+      <stop
+         style="stop-color:#161616;stop-opacity:0;"
+         offset="1"
+         id="stop5" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#a0ca00;stop-opacity:1;"
+         offset="0.1975089"
+         id="stop2" />
+      <stop
+         style="stop-color:#a0ca00;stop-opacity:0.36842105;"
+         offset="1"
+         id="stop3" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient3"
+       x1="79.057625"
+       y1="48.914543"
+       x2="114.85339"
+       y2="108.48869"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4"
+       id="linearGradient5"
+       x1="-105.34746"
+       y1="96.955517"
+       x2="-52.150256"
+       y2="96.955517"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-52.214221,-52.055809)">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:end;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:0.67;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       x="-54.761463"
+       y="127.60084"
+       id="text8-3-59-9"
+       inkscape:label="hw. version"
+       transform="rotate(-90)"><tspan
+         sodipodi:role="line"
+         id="tspan8-0-6-3"
+         style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1"
+         x="-54.322254"
+         y="127.60084">MX PLC R1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.46667px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:start;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       x="-102.2282"
+       y="73.282631"
+       id="text8-4-8"
+       transform="rotate(-90)"><tspan
+         sodipodi:role="line"
+         id="tspan8-1-3"
+         style="font-size:8.46667px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+         x="-102.2282"
+         y="73.282631">CPU</tspan></text>
+    <rect
+       style="fill:url(#linearGradient5);fill-opacity:0.757282;stroke:#000000;stroke-width:2.00001;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1-3-7"
+       width="51.197189"
+       height="87.482582"
+       x="-104.34745"
+       y="53.214226"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1"
+       width="51.291641"
+       height="76.529533"
+       x="-104.34745"
+       y="58.69075"
+       inkscape:label="main panel"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:url(#linearGradient3);fill-opacity:1;stroke:#000000;stroke-width:2.00001;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1-9"
+       width="67.501244"
+       height="44.01767"
+       x="63.204903"
+       y="56.692795"
+       inkscape:label="main panel" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:63.5px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:center;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:tb-rl;direction:ltr;text-anchor:middle;fill:#58bd48;stroke:#bdbdbd;stroke-width:2.89999;stroke-linejoin:bevel"
+       x="46.866615"
+       y="36.750595"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="stroke-width:2.9"
+         x="46.866615"
+         y="36.750595" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:33.6862px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:center;letter-spacing:0.232996px;word-spacing:0.460378px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.89999;stroke-linejoin:bevel"
+       x="95.944939"
+       y="83.843811"
+       id="text2"><desc
+         id="desc5">plc logo testtest</desc><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.9"
+         x="96.06144"
+         y="83.843811">PLC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:13.9765px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:center;letter-spacing:0.256414px;word-spacing:0.506651px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.89999;stroke-linejoin:bevel"
+       x="87.68116"
+       y="108.05524"
+       id="text2-8"
+       transform="scale(1.100511,0.90866879)"><tspan
+         sodipodi:role="line"
+         id="tspan2-6"
+         style="font-size:13.9765px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.9"
+         x="87.809364"
+         y="108.05524">monitor</tspan></text>
+  </g>
+</svg>
