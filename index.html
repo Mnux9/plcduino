@@ -232,7 +232,7 @@
     </div>
 
     <div class="control-group">
-      <span id="currentlyEditingText" style="font-weight: bold; display: block; margin-bottom: 10px;">Editing: -</span>
+      <span id="currentlyEditingText" style="font-weight: light; display: block; margin-bottom: 10px;">Editing: -</span>
       <div style="display: flex; align-items: center; margin-bottom: 10px;"> <label for="staticLabelEditor" style="margin-right: 5px; white-space: nowrap;">Edit Label Text:</label>
         <input type="text" id="staticLabelEditor" class="label-editor" />
       </div>
@@ -264,8 +264,6 @@
     const labelSelector = document.getElementById('labelSelector');
 
     let currentlyEditedSvgLabel = null; // To keep track of the SVG text element being edited
-
-    // Removed the editToggle event listener as editing is always enabled.
 
     // Function to toggle collapse
     svgControlButtonsGroup.querySelector('.control-group-header').addEventListener('click', () => {
@@ -322,101 +320,163 @@
       svgWrapperElement.querySelector('.svg-inner-container').innerHTML = ''; // Clear existing content
       svgWrapperElement.querySelector('.svg-inner-container').appendChild(importedSVG);
 
-      // Targeting `#layer4` for editable labels
+      const inkscapeNS = 'http://www.inkscape.org/namespaces/inkscape';
+
+      // Handle editable labels from #layer4
       const editableLabelsGroup = importedSVG.querySelector('#layer4');
-      if (!editableLabelsGroup) {
+      if (editableLabelsGroup) {
+        const labels = editableLabelsGroup.querySelectorAll('text');
+        const currentLabelMap = new Map(); // Map for this specific SVG instance
+        labelMaps.set(instanceId, currentLabelMap); // Associate this map with the instanceId
+
+        const prefixChar = String.fromCharCode(65 + instanceId);
+        const prefix = prefixChar + '/'; // A/, B/, C/, etc.
+
+        labels.forEach(label => {
+          const originalLabelName = label.getAttributeNS(inkscapeNS, 'label');
+          const prefixedLabelName = originalLabelName ? prefix + originalLabelName : null;
+
+          if (prefixedLabelName) {
+            // Update the inkscape:label attribute with the prefix
+            label.setAttributeNS(inkscapeNS, 'label', prefixedLabelName);
+            currentLabelMap.set(prefixedLabelName, label);
+
+            // Update the text content of "IO-DESIGNATOR" label (if applicable to your SVGs)
+            if (originalLabelName === 'IO-DESIGNATOR') {
+                label.textContent = prefixChar; // Set its text content to just the character (A, B, C)
+            }
+          }
+
+          label.classList.add('editable');
+
+          // Tooltip event listeners
+          label.addEventListener('mouseover', (e) => {
+            if (prefixedLabelName) {
+              customTooltip.textContent = prefixedLabelName;
+              customTooltip.style.display = 'block';
+              customTooltip.style.left = `${e.clientX + 10}px`;
+              customTooltip.style.top = `${e.clientY + 10}px`;
+            }
+          });
+
+          label.addEventListener('mouseout', () => {
+            customTooltip.style.display = 'none';
+          });
+
+          label.addEventListener('mousemove', (e) => {
+            if (customTooltip.style.display === 'block') {
+              customTooltip.style.left = `${e.clientX + 10}px`;
+              customTooltip.style.top = `${e.clientY + 10}px`;
+            }
+          });
+
+          // Click event listener for editing
+          label.addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent global click listener from immediately de-selecting
+
+            // Remove highlight from previously edited label
+            if (currentlyEditedSvgLabel) {
+              currentlyEditedSvgLabel.classList.remove('editing-highlight');
+            }
+
+            currentlyEditedSvgLabel = this; // Set the current SVG label being edited to 'this' (the clicked label)
+            currentlyEditedSvgLabel.classList.add('editing-highlight'); // Add highlight
+
+            // Get text content from the tspan, ignoring desc
+            const tspanElement = this.querySelector('tspan');
+            const currentLabelText = tspanElement ? tspanElement.textContent : this.textContent;
+
+            // Get description content
+            const descElement = this.querySelector('desc');
+            const currentDescription = descElement ? descElement.textContent : 'No description available.';
+            descriptionDisplay.textContent = currentDescription;
+
+
+            const labelInkscapeName = this.getAttributeNS(inkscapeNS, 'label');
+
+            currentlyEditingText.textContent = `Editing: ${labelInkscapeName || 'No Name'}`;
+            staticLabelEditor.value = currentLabelText; // Use the extracted text
+            staticLabelEditor.readOnly = false; // Ensure editable labels are not read-only
+            staticLabelEditor.focus(); // Focus the editor
+
+
+            // Select this label in the dropdown
+            labelSelector.value = labelInkscapeName;
+
+            // Live update the SVG text as user types
+            staticLabelEditor.removeEventListener('input', liveUpdateSvgText); // Remove old listener
+            staticLabelEditor.addEventListener('input', liveUpdateSvgText); // Add new listener for current label
+          });
+        });
+      } else {
         console.warn("Group with ID 'layer4' not found in SVG for instance:", instanceId, "from file:", svgFilePath);
-        return;
       }
 
-      const labels = editableLabelsGroup.querySelectorAll('text');
-      const currentLabelMap = new Map(); // Map for this specific SVG instance
-      labelMaps.set(instanceId, currentLabelMap); // Associate this map with the instanceId
+      // Handle viewable-only labels from #layer8
+      const viewableLabelsGroup = importedSVG.querySelector('#layer8');
+      if (viewableLabelsGroup) {
+        const labels = viewableLabelsGroup.querySelectorAll('text');
+        labels.forEach(label => {
+          const originalLabelName = label.getAttributeNS(inkscapeNS, 'label');
+          // Add tooltip if it has an inkscape:label
+          if (originalLabelName) {
+              label.addEventListener('mouseover', (e) => {
+                customTooltip.textContent = originalLabelName;
+                customTooltip.style.display = 'block';
+                customTooltip.style.left = `${e.clientX + 10}px`;
+                customTooltip.style.top = `${e.clientY + 10}px`;
+              });
 
-      const prefixChar = String.fromCharCode(65 + instanceId);
-      const prefix = prefixChar + '/'; // A/, B/, C/, etc.
+              label.addEventListener('mouseout', () => {
+                customTooltip.style.display = 'none';
+              });
 
-      labels.forEach(label => {
-        const inkscapeNS = 'http://www.inkscape.org/namespaces/inkscape';
-        const originalLabelName = label.getAttributeNS(inkscapeNS, 'label');
-        const prefixedLabelName = originalLabelName ? prefix + originalLabelName : null;
+              label.addEventListener('mousemove', (e) => {
+                if (customTooltip.style.display === 'block') {
+                  customTooltip.style.left = `${e.clientX + 10}px`;
+                  customTooltip.style.top = `${e.clientY + 10}px`;
+                }
+              });
 
-        if (prefixedLabelName) {
-          // Update the inkscape:label attribute with the prefix
-          label.setAttributeNS(inkscapeNS, 'label', prefixedLabelName); // Use label instead of inkscape:label directly
-          currentLabelMap.set(prefixedLabelName, label);
+              // Add click event for viewable labels to show description and text
+              label.addEventListener('click', function (event) {
+                event.stopPropagation();
 
-          // Update the text content of "IO-DESIGNATOR" label (if applicable to your SVGs)
-          if (originalLabelName === 'IO-DESIGNATOR') {
-              label.textContent = prefixChar; // Set its text content to just the character (A, B, C)
-          }
-        }
+                // Remove highlight from any previously edited/viewed label
+                if (currentlyEditedSvgLabel) {
+                    currentlyEditedSvgLabel.classList.remove('editing-highlight');
+                }
+                // No highlight for view-only labels
+                currentlyEditedSvgLabel = null;
 
-        label.classList.add('editable');
 
-        // Tooltip event listeners
-        label.addEventListener('mouseover', (e) => {
-          if (prefixedLabelName) {
-            customTooltip.textContent = prefixedLabelName;
-            customTooltip.style.display = 'block';
-            customTooltip.style.left = `${e.clientX + 10}px`;
-            customTooltip.style.top = `${e.clientY + 10}px`;
+                // Get description content for the clicked label
+                const descElement = this.querySelector('desc');
+                const currentDescription = descElement ? descElement.textContent : 'No description available.';
+                descriptionDisplay.textContent = currentDescription;
+
+                // For layer8, put the description into the staticLabelEditor
+                staticLabelEditor.value = currentDescription;
+                staticLabelEditor.readOnly = true; // Make it read-only
+                staticLabelEditor.removeEventListener('input', liveUpdateSvgText); // No live update for read-only
+
+                const labelInkscapeName = this.getAttributeNS(inkscapeNS, 'label');
+                currentlyEditingText.textContent = `Viewing: ${labelInkscapeName || 'No Name'}`;
+
+                // Select this label in the dropdown (optional, but good for consistency)
+                labelSelector.value = labelInkscapeName;
+              });
           }
         });
-
-        label.addEventListener('mouseout', () => {
-          customTooltip.style.display = 'none';
-        });
-
-        label.addEventListener('mousemove', (e) => {
-          if (customTooltip.style.display === 'block') {
-            customTooltip.style.left = `${e.clientX + 10}px`;
-            customTooltip.style.top = `${e.clientY + 10}px`;
-          }
-        });
-
-        // Click event listener for editing
-        label.addEventListener('click', function (event) {
-          event.stopPropagation(); // Prevent global click listener from immediately de-selecting
-
-          // Remove highlight from previously edited label
-          if (currentlyEditedSvgLabel && currentlyEditedSvgLabel !== this) {
-            currentlyEditedSvgLabel.classList.remove('editing-highlight');
-          }
-
-          currentlyEditedSvgLabel = this; // Set the current SVG label being edited to 'this' (the clicked label)
-          currentlyEditedSvgLabel.classList.add('editing-highlight'); // Add highlight
-
-          // Get text content from the tspan, ignoring desc
-          const tspanElement = this.querySelector('tspan');
-          const currentLabelText = tspanElement ? tspanElement.textContent : this.textContent;
-
-          // Get description content
-          const descElement = this.querySelector('desc');
-          const currentDescription = descElement ? descElement.textContent : 'No description available.';
-          descriptionDisplay.textContent = currentDescription;
-
-
-          const labelInkscapeName = this.getAttributeNS(inkscapeNS, 'label'); // Use inkscapeNS here
-
-          currentlyEditingText.textContent = `Editing: ${labelInkscapeName || 'No Name'}`;
-          staticLabelEditor.value = currentLabelText; // Use the extracted text
-          staticLabelEditor.focus(); // Focus the editor
-
-          // Select this label in the dropdown
-          labelSelector.value = labelInkscapeName;
-
-          // Live update the SVG text as user types
-          staticLabelEditor.removeEventListener('input', liveUpdateSvgText); // Remove old listener
-          staticLabelEditor.addEventListener('input', liveUpdateSvgText); // Add new listener for current label
-        });
-      });
+      } else {
+        console.warn("Group with ID 'layer8' not found in SVG for instance:", instanceId, "from file:", svgFilePath);
+      }
 
       updateLabelSelector(); // Update the dropdown after each SVG instance is loaded
     }
 
     function liveUpdateSvgText() {
-        if (currentlyEditedSvgLabel) {
+        if (currentlyEditedSvgLabel && !staticLabelEditor.readOnly) {
             // Live update the tspan if it exists, otherwise the text element itself
             const tspanElement = currentlyEditedSvgLabel.querySelector('tspan');
             if (tspanElement) {
@@ -428,8 +488,6 @@
     }
 
     // Function to apply text changes (called by Enter)
-    // This function now only applies the text to the SVG and removes the highlight.
-    // It does NOT clear the side panel inputs, those remain visible.
     function applyTextChanges() {
         if (currentlyEditedSvgLabel) {
             // Text is already updated live via liveUpdateSvgText.
@@ -440,18 +498,12 @@
         }
     }
 
-    // Removed the blur event listener for staticLabelEditor
-
     staticLabelEditor.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' && !staticLabelEditor.readOnly) { // Only apply if not read-only
         e.preventDefault(); // Prevent new line in some browsers
         applyTextChanges(); // Apply changes and de-highlight
-        // The text in the editor remains, as per requirement
       }
-      // Removed the Escape key functionality to keep content visible.
     });
-
-    // Removed the Event listener for the "Apply Text" button as the button is removed.
 
     // Function to set label color
     function setLabelColor(prefixedLabelName, color) {
@@ -481,17 +533,17 @@
     // Add event listener for when a label is selected from the dropdown
     labelSelector.addEventListener('change', () => {
         const selectedPrefixedLabelName = labelSelector.value;
-        // When a new label is selected from the dropdown, always 'activate' it.
+
+        // If nothing is selected, ensure state is clean
         if (!selectedPrefixedLabelName) {
-            // If nothing is selected (shouldn't happen if always populated),
-            // just remove highlight if active and clear reference.
             if (currentlyEditedSvgLabel) {
                 currentlyEditedSvgLabel.classList.remove('editing-highlight');
-                currentlyEditedSvgLabel = null;
             }
+            currentlyEditedSvgLabel = null;
             currentlyEditingText.textContent = 'Editing: -'; // Reset to initial state
-            staticLabelEditor.value = '';
-            descriptionDisplay.textContent = '';
+            // Keep current value in staticLabelEditor but make it read-only
+            staticLabelEditor.readOnly = true;
+            descriptionDisplay.textContent = ''; // Clear description if nothing selected
             staticLabelEditor.removeEventListener('input', liveUpdateSvgText);
             return;
         }
@@ -507,45 +559,58 @@
         }
 
         if (foundLabel) {
+            // Check if the foundLabel is part of #layer4 (editable)
+            const isEditable = foundLabel.closest('#layer4') !== null;
+
             // Remove highlight from previously edited label if it's different
-            if (currentlyEditedSvgLabel && currentlyEditedSvgLabel !== foundLabel) {
+            if (currentlyEditedSvgLabel) {
                 currentlyEditedSvgLabel.classList.remove('editing-highlight');
             }
-            currentlyEditedSvgLabel = foundLabel;
-            currentlyEditedSvgLabel.classList.add('editing-highlight');
-
-            currentlyEditingText.textContent = `Editing: ${selectedPrefixedLabelName}`;
-            // Ensure staticLabelEditor.value gets the actual text content from tspan
-            const tspanElement = foundLabel.querySelector('tspan');
-            staticLabelEditor.value = tspanElement ? tspanElement.textContent : foundLabel.textContent;
 
             // Get description content for the selected label
             const descElement = foundLabel.querySelector('desc');
             const currentDescription = descElement ? descElement.textContent : 'No description available.';
             descriptionDisplay.textContent = currentDescription;
 
-            staticLabelEditor.focus();
 
-            // Re-attach live update listener for the newly selected label
-            staticLabelEditor.removeEventListener('input', liveUpdateSvgText);
-            staticLabelEditor.addEventListener('input', liveUpdateSvgText);
+            if (isEditable) {
+                currentlyEditedSvgLabel = foundLabel;
+                currentlyEditedSvgLabel.classList.add('editing-highlight');
+
+                currentlyEditingText.textContent = `Editing: ${selectedPrefixedLabelName}`;
+                // For editable labels (layer4), show the label's text in the editor
+                const tspanElement = foundLabel.querySelector('tspan');
+                staticLabelEditor.value = tspanElement ? tspanElement.textContent : foundLabel.textContent;
+                staticLabelEditor.readOnly = false; // Enable editing
+                staticLabelEditor.focus();
+                staticLabelEditor.removeEventListener('input', liveUpdateSvgText);
+                staticLabelEditor.addEventListener('input', liveUpdateSvgText);
+            } else {
+                // If it's a viewable-only label from #layer8
+                currentlyEditedSvgLabel = null; // No active editable label
+                currentlyEditingText.textContent = `Viewing: ${selectedPrefixedLabelName}`; // Change text to "Viewing"
+                staticLabelEditor.value = currentDescription; // Show the description in the text field
+                staticLabelEditor.readOnly = true; // Make read-only
+                staticLabelEditor.removeEventListener('input', liveUpdateSvgText); // No live update
+            }
+
         } else {
             // This case should ideally not be hit if updateLabelSelector is correct,
-            // but if it is, clear the state.
+            // but if it is, ensure state is clean and input is read-only.
             if (currentlyEditedSvgLabel) {
                 currentlyEditedSvgLabel.classList.remove('editing-highlight');
                 currentlyEditedSvgLabel = null;
             }
             currentlyEditingText.textContent = 'Editing: -'; // Reset to initial state
-            staticLabelEditor.value = '';
-            descriptionDisplay.textContent = '';
+            // Keep current value in staticLabelEditor but make it read-only
+            staticLabelEditor.readOnly = true;
+            descriptionDisplay.textContent = ''; // Clear description if nothing selected
             staticLabelEditor.removeEventListener('input', liveUpdateSvgText);
         }
     });
 
 
     // Global click listener to de-highlight an SVG element if clicked outside.
-    // It no longer clears the text editor content, keeping the last edited label visible.
     document.addEventListener('click', function (e) {
       // Check if there's an actively edited label
       if (currentlyEditedSvgLabel) {
@@ -559,8 +624,18 @@
             // simply remove the highlight and clear the 'active' label reference.
             currentlyEditedSvgLabel.classList.remove('editing-highlight');
             currentlyEditedSvgLabel = null;
+            currentlyEditingText.textContent = 'Editing: -'; // Reset to initial state
+            staticLabelEditor.readOnly = true; // Make it read-only again
             staticLabelEditor.removeEventListener('input', liveUpdateSvgText); // Remove live update if no label is active
+            // Do NOT clear staticLabelEditor.value or descriptionDisplay.textContent
         }
+      } else {
+        // If no label is actively edited (e.g., after clicking a view-only label and then outside)
+        // Ensure staticLabelEditor is read-only. Do NOT clear content.
+        staticLabelEditor.readOnly = true;
+        currentlyEditingText.textContent = 'Editing: -';
+        // Do NOT clear staticLabelEditor.value or descriptionDisplay.textContent
+        staticLabelEditor.removeEventListener('input', liveUpdateSvgText);
       }
     });
 
@@ -600,9 +675,9 @@
         if (currentlyEditedSvgLabel && !document.body.contains(currentlyEditedSvgLabel)) {
             currentlyEditedSvgLabel = null;
             currentlyEditingText.textContent = 'Editing: -'; // Reset to initial state
-            staticLabelEditor.value = '';
-            descriptionDisplay.textContent = '';
+            staticLabelEditor.readOnly = true; // Ensure it's read-only
             staticLabelEditor.removeEventListener('input', liveUpdateSvgText);
+            // Do NOT clear staticLabelEditor.value or descriptionDisplay.textContent
         }
         updateLabelSelector(); // Update dropdown after removal
       }

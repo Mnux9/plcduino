@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arduino Pin Monitor</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .led-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .led {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: white;
+    }
+
+    .led.on {
+      background-color: limegreen;
+    }
+
+    .led.off {
+      background-color: crimson;
+    }
+
+    label, input {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Arduino Pin Monitor</h1>
+  <button id="connectBtn">Connect to Arduino</button>
+
+  <div class="section">
+    <label for="intervalInput">Polling Interval (ms): </label>
+    <input type="number" id="intervalInput" value="1000" min="100">
+  </div>
+
+  <div class="section">
+    <h2>Output Pins</h2>
+    <div class="led-container" id="outputContainer"></div>
+  </div>
+
+  <div class="section">
+    <h2>Input Pins</h2>
+    <div class="led-container" id="inputContainer"></div>
+  </div>
+
+  <script>
+    let port, reader, writer;
+    let pollingInterval;
+    let intervalMs = 1000;
+    let outputLeds = {}, inputLeds = {};
+
+    document.getElementById('intervalInput').addEventListener('change', e => {
+      intervalMs = parseInt(e.target.value);
+      startPolling();
+    });
+
+document.getElementById('connectBtn').addEventListener('click', async () => {
+  try {
+    port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 9600 });
+
+    // Text encoder for writing
+    const encoder = new TextEncoderStream();
+    encoder.readable.pipeTo(port.writable);
+    writer = encoder.writable.getWriter();
+
+    // Text decoder for reading
+    const decoder = new TextDecoderStream();
+    port.readable.pipeTo(decoder.writable);
+    reader = decoder.readable.getReader();
+  } catch (err) {
+    console.error("Connection failed:", err);
+  }
+
+  startPolling();
+  readSerialLoop();
+});
+
+    async function readSerialLoop() {
+      let buffer = "";
+      while (port.readable) {
+        try {
+          const { value, done } = await reader.read();
+          if (done) break;
+          if (value) {
+            buffer += value;
+            let idx;
+            while ((idx = buffer.indexOf("\n")) >= 0) {
+              const line = buffer.slice(0, idx).trim();
+              buffer = buffer.slice(idx + 1);
+              handleResponse(line);
+            }
+          }
+        } catch (err) {
+          console.error("Read error:", err);
+          break;
+        }
+      }
+    }
+
+    function startPolling() {
+      if (pollingInterval) clearInterval(pollingInterval);
+      pollingInterval = setInterval(() => {
+        if (writer) writer.write("RP1\n");
+      }, intervalMs);
+    }
+
+    function handleResponse(line) {
+      try {
+        const data = JSON.parse(line);
+        updateLeds(data.outputs, outputLeds, 'outputContainer');
+        updateLeds(data.inputs, inputLeds, 'inputContainer');
+      } catch (e) {
+        console.warn("Invalid response:", line);
+      }
+    }
+
+    function updateLeds(pinStates, ledMap, containerId) {
+      const container = document.getElementById(containerId);
+      if (Object.keys(ledMap).length === 0) {
+        // Create LEDs on first load
+        container.innerHTML = '';
+        for (const pin in pinStates) {
+          const led = document.createElement('div');
+          led.className = 'led';
+          led.textContent = pin;
+          ledMap[pin] = led;
+          container.appendChild(led);
+        }
+      }
+
+      for (const pin in pinStates) {
+        const led = ledMap[pin];
+        const state = pinStates[pin];
+        if (led) {
+          led.classList.toggle('on', state === 'HIGH');
+          led.classList.toggle('off', state !== 'HIGH');
+        }
+      }
+    }
+  </script>
+</body>
+</html>

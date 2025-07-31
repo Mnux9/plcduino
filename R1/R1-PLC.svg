@@ -24,14 +24,14 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="1.0482005"
-     inkscape:cx="219.90068"
-     inkscape:cy="301.94605"
+     inkscape:cx="240.41202"
+     inkscape:cy="260.92336"
      inkscape:window-width="1440"
      inkscape:window-height="816"
      inkscape:window-x="295"
      inkscape:window-y="1080"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer8"
      showguides="false" />
   <defs
      id="defs1" />
@@ -309,30 +309,6 @@ PC817</desc><tspan
          y="23.845293">DI 12</tspan></text>
     <text
        xml:space="preserve"
-       style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:start;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
-       x="-30.879726"
-       y="7.6507158"
-       id="text8-3-59-93"
-       transform="rotate(-90,31.533551,9.1985838)"><tspan
-         sodipodi:role="line"
-         id="tspan8-0-6-9"
-         style="font-size:5.64444px;text-align:start;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1"
-         x="-30.879726"
-         y="7.6507158">GND</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:start;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
-       x="-30.710392"
-       y="61.252834"
-       id="text8-3-59-93-4"
-       transform="rotate(-90,31.533551,9.1985838)"><tspan
-         sodipodi:role="line"
-         id="tspan8-0-6-9-2"
-         style="font-size:5.64444px;text-align:start;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1"
-         x="-30.710392"
-         y="61.252834">GND</tspan></text>
-    <text
-       xml:space="preserve"
        style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:end;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#ca8417;fill-opacity:1;stroke:none;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
        x="-123.97393"
        y="12.98117"
@@ -466,12 +442,14 @@ ULN2003A</desc><tspan
        y="98.791809"
        id="text46"
        transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="17"><tspan
+       inkscape:label="UART RX"><desc
+         id="desc19">UART RX
+3.3V</desc><tspan
          sodipodi:role="line"
          id="tspan46"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#008080;fill-opacity:1;stroke:none;stroke-width:1"
          x="-123.53472"
-         y="98.791809">RX➜</tspan></text>
+         y="98.791809">RX</tspan></text>
     <text
        xml:space="preserve"
        style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:end;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#008080;fill-opacity:1;stroke:none;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
@@ -479,20 +457,28 @@ ULN2003A</desc><tspan
        y="104.16743"
        id="text47"
        transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="18"><tspan
+       inkscape:label="URAT TX"><desc
+         id="desc18">UART TX
+3.3V</desc><tspan
          sodipodi:role="line"
          id="tspan47"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#008080;fill-opacity:1;stroke:none;stroke-width:1"
          x="-123.53472"
-         y="104.16743">TX➜</tspan></text>
+         y="104.16743">TX</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="screw-labels-perma">
     <text
        xml:space="preserve"
        style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:end;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
        x="-123.97393"
        y="7.6507158"
        id="text8-3-59"
-       transform="rotate(-90,31.533551,9.1985838)"
-       inkscape:label="1"><tspan
+       transform="rotate(-90)"
+       inkscape:label="GND"><desc
+         id="desc21">ground</desc><tspan
          sodipodi:role="line"
          id="tspan8-0-6"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1"
@@ -504,8 +490,9 @@ ULN2003A</desc><tspan
        x="-123.97393"
        y="61.207657"
        id="text33-3"
-       transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="10"><tspan
+       transform="matrix(0,-0.9999993,1.0000007,0,0,0)"
+       inkscape:label="GND"><desc
+         id="desc22">ground</desc><tspan
          sodipodi:role="line"
          id="tspan33-5"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1"
@@ -517,8 +504,9 @@ ULN2003A</desc><tspan
        x="-123.97393"
        y="66.538124"
        id="text34-6"
-       transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="11"><tspan
+       transform="matrix(0,-0.9999993,1.0000007,0,0,0)"
+       inkscape:label="11"><desc
+         id="desc20">power in</desc><tspan
          sodipodi:role="line"
          id="tspan34-3"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#ff0000;fill-opacity:0.666667;stroke:none;stroke-width:1"
@@ -530,8 +518,9 @@ ULN2003A</desc><tspan
        x="-123.97393"
        y="71.913734"
        id="text41"
-       transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="12"><tspan
+       transform="matrix(0,-0.9999993,1.0000007,0,0,0)"
+       inkscape:label="5V"><desc
+         id="desc17">5V out</desc><tspan
          sodipodi:role="line"
          id="tspan41"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#ff0000;fill-opacity:0.666667;stroke:none;stroke-width:1"
@@ -543,8 +532,8 @@ ULN2003A</desc><tspan
        x="-123.97393"
        y="77.289345"
        id="text42"
-       transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="13"><tspan
+       transform="matrix(0,-0.9999993,1.0000007,0,0,0)"
+       inkscape:label="GND"><tspan
          sodipodi:role="line"
          id="tspan42"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#000000;fill-opacity:0.670588;stroke:none;stroke-width:1"
@@ -556,8 +545,8 @@ ULN2003A</desc><tspan
        x="-123.97393"
        y="82.664963"
        id="text43"
-       transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="14"><tspan
+       transform="matrix(0,-0.9999993,1.0000007,0,0,0)"
+       inkscape:label="GND"><tspan
          sodipodi:role="line"
          id="tspan43"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#000000;fill-opacity:0.670588;stroke:none;stroke-width:1"
@@ -569,8 +558,8 @@ ULN2003A</desc><tspan
        x="-123.97393"
        y="88.040588"
        id="text44"
-       transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="15"><tspan
+       transform="matrix(0,-0.9999993,1.0000007,0,0,0)"
+       inkscape:label="GND"><tspan
          sodipodi:role="line"
          id="tspan44"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#000000;fill-opacity:0.670588;stroke:none;stroke-width:1"
@@ -582,18 +571,42 @@ ULN2003A</desc><tspan
        x="-123.97393"
        y="93.416199"
        id="text45"
-       transform="matrix(0,-0.9999993,1.0000007,0,22.334967,40.732135)"
-       inkscape:label="16"><tspan
+       transform="matrix(0,-0.9999993,1.0000007,0,0,0)"
+       inkscape:label="GND"><tspan
          sodipodi:role="line"
          id="tspan45"
          style="font-size:5.64444px;text-align:end;text-anchor:end;fill:#000000;fill-opacity:0.670588;stroke:none;stroke-width:1"
          x="-123.53472"
          y="93.416199">GND</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:start;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       x="-30.879726"
+       y="7.6507158"
+       id="text8-3-59-93"
+       transform="rotate(-90)"
+       inkscape:label="GND"><desc
+         id="desc23">ground</desc><tspan
+         sodipodi:role="line"
+         id="tspan8-0-6-9"
+         style="font-size:5.64444px;text-align:start;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1"
+         x="-30.879726"
+         y="7.6507158">GND</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:5.64444px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:start;letter-spacing:0.439208px;word-spacing:0.867833px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+       x="-30.710392"
+       y="61.252834"
+       id="text8-3-59-93-4"
+       transform="rotate(-90)"
+       inkscape:label="GND"><desc
+         id="desc24">ground</desc><tspan
+         sodipodi:role="line"
+         id="tspan8-0-6-9-2"
+         style="font-size:5.64444px;text-align:start;text-anchor:start;fill:#000000;fill-opacity:0.67;stroke:none;stroke-width:1"
+         x="-30.710392"
+         y="61.252834">GND</tspan></text>
   </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer8"
-     inkscape:label="screw-labels-perma" />
   <g
      inkscape:groupmode="layer"
      id="layer3"
