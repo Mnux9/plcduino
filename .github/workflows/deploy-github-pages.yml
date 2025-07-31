@@ -1,44 +1,40 @@
-name: Deployment to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main  # <-- specify the branch you want to deploy from
-  pull_request:
+    branches: [main]
 
-env:
-  REPO_NAME: ${{ github.event.repository.name }}
-  REPO_OWNER: ${{ github.repository_owner }}
+permissions:
+  contents: write
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
+          submodules: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.125.5'
+          hugo-version: 'latest'
           extended: true
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+          node-version: 18
 
-      - run: npm ci
-      - run: hugo --baseURL https://${REPO_OWNER}.github.io/${REPO_NAME} --minify
+      - name: Install PostCSS and autoprefixer
+        run: npm install
+
+      - name: Build
+        run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/main' }} # <-- specify same branch as above here
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
